@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Catalog App</title>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    <script src="//apis.google.com/js/platform.js?onload=start"></script>
+</head>
+
+<body>
+    <header>
+        <div class="title center">
+            <h1>Catalog App</h1>
+            <div class="signin">
+                <h2>{{user_name}}</h2>
+                <a href="{{url_for('gdisconnect')}}">Logout</a>
+            </div>
+        </div>
+    </header>
+    <section class="center">
+        <div class="categories">
+            <h2>Categories</h2>
+            <ul>
+                {% for category in categories %}
+                <li><a href="{{url_for('show_items',category_name = category.name)}}">{{category.name}}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="items">
+            <ul>
+                <li>
+                    <a href="{{url_for('add_item')}}">Add Item</a>
+                </li>
+            </ul>
+            <h2>Latest Items</h2>
+            <ul>
+                {% for item in items %}
+                <li><a href="{{url_for('show_description',category_name = item.category_id, item_name=item.name)}}">{{item.name}}</a><span> ({{item.category_id}})</span></li>
+                {% endfor %}
+            </ul>
+        </div>
+    </section>
+</body>
+
+</html>

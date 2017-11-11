@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Catalog App</title>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    <script src="//apis.google.com/js/platform.js?onload=start"></script>
+</head>
+
+<body>
+    <header>
+        <div class="title center">
+            <h1>Catalog App</h1>
+            <div id="signinButton">
+                <span class="g-signin" data-scope="openid email profile" data-clientid="905789071921-f0511iqr4kj69ga32u9ldfpsj5dg8oek.apps.googleusercontent.com" data-redirecturi="postmessage" data-accesstype="offline" data-cookiepolicy="single_host_origin" data-callback="signInCallback" data-approvalprompt="force">
+        </span>
+            </div>
+            <div id="result"></div>
+        </div>
+    </header>
+    <section class="center">
+        <div class="description">
+            <h2>{{item.name}}</h2>
+            <p>Description: {{item.description}}</p>
+        </div>
+    </section>
+    <script>
+    function signInCallback(authResult) {
+        if (authResult['code']) {
+            // Hide the sign-in button now that the user is authorized
+
+            // Send the one-time-use code to the server, if the server responds, write a 'login successful' message to the web page and then redirect back to the main restaurants page
+            $.ajax({
+                type: 'POST',
+                url: '/gconnect?state={{STATE}}',
+                processData: false,
+                data: authResult['code'],
+                contentType: 'application/octet-stream; charset=utf-8',
+                success: function(result) {
+                    // Handle or verify the server response if necessary.
+                    if (result == "login successful") {
+                        window.location.href = "/";
+
+                    } else if (authResult['error']) {
+                        $('#result').html('There was an error: ' + authResult['error']);
+                    } else {
+                        $('#result').html('Failed to make a server-side call. Check your configuration and console.');
+                    }
+                },
+                error: function() {
+                    alert("Invalid state parameter. Please refresh page.");
+                }
+
+            });
+        }
+    }
+    </script>
+</body>
+
+</html>
