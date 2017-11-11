@@ -67,6 +67,7 @@ Run the virtual machine:
 
 ```
 $ vagrant up
+$ vagrant ssh
 $ cd /vagrant/catalog
 ```
 
