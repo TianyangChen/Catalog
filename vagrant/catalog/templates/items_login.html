@@ -16,7 +16,7 @@
             <h1>Catalog App</h1>
             <div class="signin">
                 <h2>{{user_name}}</h2>
-                <a href="{{url_for('gdisconnect')}}">Logout</a>
+                <a href="{{url_for('google.gdisconnect')}}">Logout</a>
             </div>
         </div>
     </header>
@@ -25,7 +25,7 @@
             <h2>Categories</h2>
             <ul>
                 {% for category in categories %}
-                <li><a href="{{url_for('show_items',category_name = category.name)}}">{{category.name}}</a></li>
+                <li><a href="{{url_for('items.show_items',category_name = category.name)}}">{{category.name}}</a></li>
                 {% endfor %}
             </ul>
         </div>
@@ -33,7 +33,7 @@
             <h2>{{category_name}} ({{num_items}} items)</h2>
             <ul>
                 {% for item in items %}
-                <li><a href="{{url_for('show_description',category_name = item.category_id, item_name=item.name)}}">{{item.name}}</a></li>
+                <li><a href="{{url_for('description.show_description',category_name = item.category_id, item_name=item.name)}}">{{item.name}}</a></li>
                 {% endfor %}
             </ul>
         </div>

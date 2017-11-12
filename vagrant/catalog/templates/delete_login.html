@@ -18,7 +18,7 @@
             <h1>Catalog App</h1>
             <div class="signin">
                 <h2>{{user_name}}</h2>
-                <a href="{{url_for('gdisconnect')}}">Logout</a>
+                <a href="{{url_for('google.gdisconnect')}}">Logout</a>
             </div>
         </div>
     </header>
@@ -33,7 +33,7 @@
     </div>
     <section class="center">
         <h2>Delete Item</h2>
-        <form action="{{url_for('delete_item', item_name=item.name)}}" method="post">
+        <form action="{{url_for('delete.delete_item', item_name=item.name)}}" method="post">
             <div class="form-group">
                 <p>Are you sure you want to delete {{item.name}}?</p>
                 <input type="submit" value="Delete">

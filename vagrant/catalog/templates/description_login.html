@@ -16,7 +16,7 @@
             <h1>Catalog App</h1>
             <div class="signin">
                 <h2>{{user_name}}</h2>
-                <a href="{{url_for('gdisconnect')}}">Logout</a>
+                <a href="{{url_for('google.gdisconnect')}}">Logout</a>
             </div>
         </div>
     </header>
@@ -27,13 +27,13 @@
         </div>
         <ul class="ed">
             <li>
-                <a href="{{url_for('edit_item', item_name=item.name)}}">Edit</a>
+                <a href="{{url_for('edit.edit_item', item_name=item.name)}}">Edit</a>
             </li>
             <li>
                 <span>|</span>
             </li>
             <li>
-                <a href="{{url_for('delete_item', item_name=item.name)}}">Delete</a>
+                <a href="{{url_for('delete.delete_item', item_name=item.name)}}">Delete</a>
             </li>
         </ul>
     </section>
